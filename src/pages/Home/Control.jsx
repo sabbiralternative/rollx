@@ -1,4 +1,8 @@
+import { useState } from "react";
+import History from "./History";
+
 const Control = ({ handleStartGame, betAmount, setBetAmount }) => {
+  const [showHistory, setShowHistory] = useState(false);
   const handleIncreaseBetAmount = () => {
     if (betAmount === 21) {
       return;
@@ -206,51 +210,8 @@ const Control = ({ handleStartGame, betAmount, setBetAmount }) => {
         SPIN
       </div>
       <div className="turbo-mode-background" />
-      <div className="history" />
-      <div className="rollx-history">
-        <div className="history-tab-parent">
-          <a className="history-tab active" data-tab="my-wins">
-            <span>MY BETS</span>
-          </a>
-          <a className="history-tab" data-tab="top-wins">
-            <span> TOP WINS</span>
-          </a>
-        </div>
-        <div className="history-content" data-active-tab="my-wins">
-          <a className="close-rollx-history" />
-          <span className="top-wins-tabs-bg">
-            <a className="top-wins-tab active" data-inside-tab="daily">
-              DAILY
-            </a>
-            <a className="top-wins-tab" data-inside-tab="weekly">
-              WEEKLY
-            </a>
-            <a className="top-wins-tab" data-inside-tab="monthly">
-              MONTHLY
-            </a>
-          </span>
-          <aside className="my-wins-tab-parent">
-            <div className="history-list-header">
-              <span> X </span>
-              <span> BET </span>
-              <span> WIN </span>
-              <span> TIME </span>
-            </div>
-            <div className="history-list-content" />
-          </aside>
-          <aside className="top-wins-tab-parent">
-            <div className="history-list-header">
-              <span> PLAYER </span>
-              <span> X </span>
-              <span> BET </span>
-              <span> WIN </span>
-            </div>
-            <div className="history-list-content daily inside-content active" />
-            <div className="history-list-content weekly inside-content" />
-            <div className="history-list-content monthly inside-content" />
-          </aside>
-        </div>
-      </div>
+      <div className="history" onClick={() => setShowHistory(true)} />
+      {showHistory && <History setShowHistory={setShowHistory} />}
     </div>
   );
 };
